@@ -20,7 +20,7 @@
                     Source="onu.png"
                     WidthRequest="200">
                 </Image>
-            <!-- GRID -->
+            <!-- GRID DE LOS DATOS-->
                 <Grid
                     Margin="0,20">
                     <Grid.ColumnDefinitions>
@@ -50,21 +50,29 @@
                         Placeholder="Enter your password...">
                     </Entry>                                    
                 </Grid>
+                
+                <ActivityIndicator>
+            
+                </ActivityIndicator>
+            
                 <StackLayout
                     Orientation="Horizontal">
                     <Label
                         HorizontalOptions="StartAndExpand"
-                        Text="Rememberme in this device"
+                        Text="Rememberme on this device"
                         VerticalOptions="Center">
                     </Label>
                     <Switch
                         HorizontalOptions="End">
                     </Switch>
                 </StackLayout>
-    
-            <ActivityIndicator>
-            
-            </ActivityIndicator>
+                
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Forgot your password?"
+                    TextColor="blue">
+                </Label>
+
                 <!-- para hacer bien el redondeo de un boton el BorderRadius debe ser la mitad
                 mitad de HeightRequest -->
                 <StackLayout
