@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <infra:InstanceLocator x:Key="Locator"/>
         </ResourceDictionary>
-        
+        <!--este infra debe ser iguales si se cambia en el nombre -->
+        <!--  <infra:InstanceLocator x:Key="Locator"/> Esto se hace para ligar la InstaceLocator con loginPage-->
 	</Application.Resources>
 </Application>

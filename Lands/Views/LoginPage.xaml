@@ -4,25 +4,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
         x:Class="Lands.Views.LoginPage"
         BindingContext="{Binding Main, Source={StaticResource Locator}}"
-        Title="Login">
+        Title="Lands">
         <!-- Con el NavigationPage en el app.xaml.cs ya con eso podemos activar el titulo LOGIN --> 
+        <!-- StaticResource = diccionario de recursos -->
 	<ContentPage.Content>
-        <ScrollView>
+        <ScrollView
+            BindingContext="{Binding Login}">
             <StackLayout
-                Padding="10,20,10,5">
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="Large"
-                    HorizontalOptions="Center"
-                    Text="Lands">
-                </Label>
+                Padding="5">
                 <Image
                     Source="onu.png"
                     WidthRequest="200">
                 </Image>
             <!-- GRID DE LOS DATOS-->
                 <Grid
-                    Margin="0,20">
+                    Margin="10,0"
+                    VerticalOptions="CenterAndExpand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
@@ -30,39 +27,52 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
-                        Text="E-Mail">
+                        Text="E-Mail"
+                        VerticalOptions="Center">
                     </Label>
+                    <!-- Agregamos VerticalOptions para que quede bien en Android -->
+
                     <Entry
                         Grid.Row="0"
                         Grid.Column="1"
                         Keyboard="Email"
-                        Placeholder="Enter your email...">
+                        Text="{Binding Email, Mode=TwoWay}"
+                        Placeholder="Ent er your email...">
                     </Entry>
+                    <!-- Text="{Binding Email}" = capturamos el valor a la viewmodel-->
                     <Label
                         Grid.Row="1"
                         Grid.Column="0"
-                        Text="Password">
+                        Text="Password"
+                        VerticalOptions="Center">
                     </Label>
+                    <!-- Agregamos VerticalOptions para que quede bien en Android -->
                     <Entry
                         Grid.Row="1"
                         Grid.Column="1"
                         IsPassword="true"
+                        Text="{Binding Password, Mode = TwoWay}"
                         Placeholder="Enter your password...">
                     </Entry>                                    
                 </Grid>
                 
-                <ActivityIndicator>
+                <ActivityIndicator
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}"
+                    VerticalOptions="CenterAndExpand">
             
                 </ActivityIndicator>
             
                 <StackLayout
-                    Orientation="Horizontal">
+                    Margin="10,0"
+                    Orientation="Horizontal"
+                    VerticalOptions="CenterAndExpand">
                     <Label
                         HorizontalOptions="StartAndExpand"
                         Text="Rememberme on this device"
                         VerticalOptions="Center">
                     </Label>
                     <Switch
+                        IsToggled="{Binding IsRemembered, Mode=TwoWay}"
                         HorizontalOptions="End">
                     </Switch>
                 </StackLayout>
@@ -70,17 +80,22 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="Forgot your password?"
-                    TextColor="blue">
+                    TextColor="blue"
+                    VerticalOptions="CenterAndExpand">
                 </Label>
 
                 <!-- para hacer bien el redondeo de un boton el BorderRadius debe ser la mitad
                 mitad de HeightRequest -->
                 <StackLayout
-                    Margin="40,0">
+                    Margin="40,0"
+                    Orientation="Horizontal"
+                    VerticalOptions="CenterAndExpand">
                 <Button
                     BackgroundColor="Navy"
-                    BorderRadius="23" 
+                    BorderRadius="23"
+                    Command="{Binding LoginCommand}" 
                     HeightRequest="46"
+                    HorizontalOptions="FillAndExpand"
                     Text="Login"
                     TextColor="White">
                 </Button>
@@ -88,13 +103,15 @@
                     BackgroundColor="Purple"
                     BorderRadius="23"
                     HeightRequest="46"
+                    HorizontalOptions="FillAndExpand"
                     Text="Register"
                     TextColor="White">
                 </Button>            
                 </StackLayout>
                 <StackLayout
                     HorizontalOptions="Center"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
                     <Image
                         Source="facebook_logo"
                         WidthRequest="100">
