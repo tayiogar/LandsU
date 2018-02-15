@@ -13,6 +13,12 @@ namespace Lands.ViewModels
             get;
             set;
         }
+
+        public LandsViewModel Lands
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -20,9 +26,27 @@ namespace Lands.ViewModels
         // ctor tab+tab contruye en constructor
         public MainViewModel()
         {
+            instance = this;
             this.Login = new LoginViewModel();
             // al poner this decimos que es una propiedad de la clase es obligatorio
         }
+        #endregion
+
+        #region Singleton
+        // nos permite hacer un llamado de la MainViewModel en cualquier lado de la aplicacion
+        private static MainViewModel instance;
+
+        public static MainViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                return new MainViewModel();
+            }
+
+            return instance;
+        }
+
+
         #endregion
 
     }

@@ -5,6 +5,7 @@
     using System.Windows.Input;
     using System.ComponentModel;
     using Xamarin.Forms;
+    using Views;
     using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 
@@ -15,6 +16,7 @@
         aqui se colocan con minusculas 
         luego debemos camviar en las propiedades en el GET y SET*/
         #region Attrubutes
+        private string email;
         private string password;
         private bool isRunning;
         private bool isEnabled;
@@ -25,8 +27,15 @@
         #region Properties
         public string Email
         {
-            get;
-            set;
+            // Esto garantiza que se refresque el email
+            get
+            {
+                return this.email;
+            }
+            set
+            {
+                SetValue(ref this.email, value);
+            }
         }
 
         public string Password
@@ -91,6 +100,13 @@
             /* como los bool al iniciar el aplicativo inician como False en el contsructor debemos 
             colocarle True para activarlo*/
             this.IsEnabled = true;
+
+            // Temporalmente vamos a quemar el mail y el pasword
+            this.Email = "tayiogar@gmail.com";
+            this.Password = "Tayio";
+
+            //https://restcountries.eu/rest/v2/all
+
         }
         #endregion
 
@@ -161,13 +177,13 @@
 
             this.IsRunning = false;
             this.IsEnabled = true;
+            // Aqui estamos limpiando los campos para que se limpien cuando entra a la otra form y debemos ponerla a regrescar 
+            this.Email = string.Empty;
+            this.password = string.Empty;
 
-            await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
-           "Ok",
-           "Fuck yeahhh",
-           "Accept");
-
-            return;
+            MainViewModel.GetInstance().Lands = new LandsViewModel();
+            // Aqui estamos apilando otra pag ina.
+            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new LandsPage());
         }
         #endregion
     }
