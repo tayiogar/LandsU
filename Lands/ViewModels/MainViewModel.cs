@@ -1,9 +1,12 @@
-﻿using System;
-// Esta es la clase principal y la que gobierna a todas las del proyecto
-using System.Diagnostics.Contracts;
-using Xamarin.Forms;
+﻿
 namespace Lands.ViewModels
 {
+
+    using System;
+    // Esta es la clase principal y la que gobierna a todas las del proyecto
+    using System.Diagnostics.Contracts;
+    using Xamarin.Forms;
+
     public class MainViewModel
     {
         #region ViewModels

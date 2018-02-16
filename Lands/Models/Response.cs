@@ -1,7 +1,5 @@
 ﻿namespace Lands.Models
 {
-    using System;
-
     public class Response
     {
         public bool IsSuccess
