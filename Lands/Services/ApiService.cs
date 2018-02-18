@@ -250,7 +250,7 @@
         //            };
         //        }
 
-        //        var result = await response.Content.ReadAsStreamAsync();
+        //        var result = await response.Content.ReadAsStringAsync();
         //        var list = JsonConvert.DeserializeObject<List<T>>(result);
         //        return new Response
         //        {
