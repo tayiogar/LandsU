@@ -1,11 +1,11 @@
-﻿using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
-namespace Lands.ViewModels
+﻿namespace Lands.ViewModels
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Lands.Services;
     using Models;
+    using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
     public class LandsViewModel : BaseViewModel
     {
@@ -48,7 +48,11 @@ namespace Lands.ViewModels
                     , connection.Message
                     , "Accept");
 
-                //Si no existe coneccion puedo sacarlo al login nuevamente
+                /*
+                PopAsync
+                Si no existe coneccion puedo sacarlo al login nuevamente
+                Tiene la misma funcionalidad que del back
+                */
 
                 await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
 
@@ -71,7 +75,7 @@ namespace Lands.ViewModels
                     , "Accept");
 
                 //Aqui tambien envia sino exista coneccion enviara al LOGIN
-                await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
+                //  await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
 
 
                 return;
