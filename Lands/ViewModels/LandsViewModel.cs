@@ -36,6 +36,26 @@ namespace Lands.ViewModels
         #region methods 
         private async void LoadLands()
         {
+
+            // Antes de mandar una peticion verfificamos si existe coneccion en internet
+
+            var connection = await this.apiService.CheckConnection();
+
+            if (!connection.IsSuccess)
+            {
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
+                    "Error"
+                    , connection.Message
+                    , "Accept");
+
+                //Si no existe coneccion puedo sacarlo al login nuevamente
+
+                await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
+
+                return;
+            }
+
+
             // Aqui mandamos la peticion para consumir los paises
             var response = await this.apiService.GetList<Land>(
             "https://restcountries.eu",
@@ -49,6 +69,10 @@ namespace Lands.ViewModels
                     "Error"
                     , response.Message
                     , "Accept");
+
+                //Aqui tambien envia sino exista coneccion enviara al LOGIN
+                await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
+
 
                 return;
             }
