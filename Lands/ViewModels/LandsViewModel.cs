@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using System.Linq;
 namespace Lands.ViewModels
 {
     using System;
@@ -19,6 +20,9 @@ namespace Lands.ViewModels
         #region Attributes
         private ObservableCollection<Land> lands;
         private bool isRefreshing;
+        // Aqui agregamos el search
+        private string filter;
+        private List<Land> landsList;
         #endregion
 
         #region Properties
@@ -31,6 +35,16 @@ namespace Lands.ViewModels
         {
             get { return this.isRefreshing; }
             set { SetValue(ref this.isRefreshing, value); }
+        }
+        public string Filter
+        {
+            get { return this.filter; }
+            set
+            {
+                SetValue(ref this.filter, value);
+                // con esto hace la busqueda por letra o quitamos sino lo deseamos buscar
+                this.Search();
+            }
         }
         #endregion
 
@@ -45,30 +59,30 @@ namespace Lands.ViewModels
         #region methods 
         private async void LoadLands()
         {
-            this.IsRefreshing = true;
+            //this.IsRefreshing = true;
 
-            // Antes de mandar una peticion verfificamos si existe coneccion en internet
+            //// Antes de mandar una peticion verfificamos si existe coneccion en internet
 
-            var connection = await this.apiService.CheckConnection();
+            //var connection = await this.apiService.CheckConnection();
 
-            if (!connection.IsSuccess)
-            {
-                this.IsRefreshing = false;
-                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
-                    "Error"
-                    , connection.Message
-                    , "Accept");
+            //if (!connection.IsSuccess)
+            //{
+            //    this.IsRefreshing = false;
+            //    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
+            //        "Error"
+            //        , connection.Message
+            //        , "Accept");
 
-                /*
-                PopAsync
-                Si no existe coneccion puedo sacarlo al login nuevamente
-                Tiene la misma funcionalidad que del back
-                */
+            //    /*
+            //    PopAsync
+            //    Si no existe coneccion puedo sacarlo al login nuevamente
+            //    Tiene la misma funcionalidad que del back
+            //    */
 
-                await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
+            //    await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
 
-                return;
-            }
+            //    return;
+            //}
 
 
             // Aqui mandamos la peticion para consumir los paises
@@ -92,8 +106,9 @@ namespace Lands.ViewModels
                 return;
             }
 
-            var list = (List<Land>)response.Result;
-            this.Lands = new ObservableCollection<Land>(list);
+            // this.landsList lo hacemos para mantener en memoria el listado original
+            this.landsList = (List<Land>)response.Result;
+            this.Lands = new ObservableCollection<Land>(this.landsList);
             this.IsRefreshing = false;
 
         }
@@ -108,6 +123,33 @@ namespace Lands.ViewModels
                 return new RelayCommand(LoadLands);
             }
         }
+
+        // Command de Search
+        public ICommand SearchCommand
+        {
+            get
+            {
+                return new RelayCommand(Search);
+            }
+        }
+        // Creamos el metodo del Search
+        private void Search()
+        {
+            if (string.IsNullOrEmpty(this.Filter))
+            {
+                this.Lands = new ObservableCollection<Land>(
+                    this.landsList);
+            }
+            else
+            {
+                // Estamos realizando la busqueda por name y capital
+                this.Lands = new ObservableCollection<Land>(
+                    this.landsList.Where(
+                        l => l.Name.ToLower().Contains(this.Filter.ToLower()) ||
+                             l.Capital.ToLower().Contains(this.Filter.ToLower())));
+            }
+        }
+
 
 
         #endregion
