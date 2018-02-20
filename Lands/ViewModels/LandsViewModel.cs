@@ -59,30 +59,30 @@ namespace Lands.ViewModels
         #region methods 
         private async void LoadLands()
         {
-            //this.IsRefreshing = true;
+            this.IsRefreshing = true;
 
-            //// Antes de mandar una peticion verfificamos si existe coneccion en internet
+            // Antes de mandar una peticion verfificamos si existe coneccion en internet
 
-            //var connection = await this.apiService.CheckConnection();
+            var connection = await this.apiService.CheckConnection();
 
-            //if (!connection.IsSuccess)
-            //{
-            //    this.IsRefreshing = false;
-            //    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
-            //        "Error"
-            //        , connection.Message
-            //        , "Accept");
+            if (!connection.IsSuccess)
+            {
+                this.IsRefreshing = false;
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
+                    "Error"
+                    , connection.Message
+                    , "Accept");
 
-            //    /*
-            //    PopAsync
-            //    Si no existe coneccion puedo sacarlo al login nuevamente
-            //    Tiene la misma funcionalidad que del back
-            //    */
+                /*
+                PopAsync
+                Si no existe coneccion puedo sacarlo al login nuevamente
+                Tiene la misma funcionalidad que del back
+                */
 
-            //    await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
+                await Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
 
-            //    return;
-            //}
+                return;
+            }
 
 
             // Aqui mandamos la peticion para consumir los paises

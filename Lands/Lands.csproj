@@ -37,6 +37,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\LandPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -62,6 +66,10 @@
     <Compile Include="Models\Response.cs" />
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Models\TokenResponse.cs" />
+    <Compile Include="Views\LandPage.xaml.cs">
+      <DependentUpon>LandPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LandViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
