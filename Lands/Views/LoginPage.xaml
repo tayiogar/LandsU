@@ -121,6 +121,10 @@
                     <Image
                         Source="twitter_logo"
                         WidthRequest="75">
+                        <!-- Aplica un gesto de toque, TapGestureRecognize crea un tab en el gesto de toque 
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognize Command="{Binding LoginFacebookComand}"/>
+                        </Image.GestureRecognizers> -->
                     </Image>
                     <Image
                         Source="instagram_logo"
