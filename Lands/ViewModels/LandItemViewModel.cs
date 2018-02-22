@@ -25,7 +25,7 @@ namespace Lands.ViewModels
                 Debemos antes de pintar la ViewModel que debemos instanciar  la viewModel a la Page
             */
             MainViewModel.GetInstance().Land = new LandViewModel(this);
-            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new LandPage());
+            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new LandTabbedPage());
         }
         #endregion
     }
