@@ -1,14 +1,23 @@
-﻿
-namespace Lands.ViewModels
+﻿namespace Lands.ViewModels
 {
-
+    using Lands.Models;
     using System;
+    using System.Collections.Generic;
     // Esta es la clase principal y la que gobierna a todas las del proyecto
     using System.Diagnostics.Contracts;
     using Xamarin.Forms;
 
     public class MainViewModel
     {
+
+        #region Properties
+        public List<Land> LandsList
+        {
+            get;
+            set;
+        }
+        #endregion
+
         #region ViewModels
         // se referncia la Login
         public LoginViewModel Login

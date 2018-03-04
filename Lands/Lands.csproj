@@ -106,6 +106,7 @@
     <Compile Include="Views\LangueagesPage.xaml.cs">
       <DependentUpon>LangueagesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Border.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
